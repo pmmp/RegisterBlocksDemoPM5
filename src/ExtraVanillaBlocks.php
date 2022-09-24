@@ -39,7 +39,7 @@ use pocketmine\utils\CloningRegistryTrait;
  *
  * @method static \pocketmine\block\Opaque TARGET()
  */
-final class CustomBlocks{
+final class ExtraVanillaBlocks{
 	use CloningRegistryTrait;
 
 	private function __construct(){

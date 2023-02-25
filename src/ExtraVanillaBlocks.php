@@ -62,7 +62,7 @@ final class ExtraVanillaBlocks{
 	}
 
 	protected static function setup() : void{
-		//If you want, store this ID somewhere for later, but you can always get it by doing CustomBlocks::TARGET()->getTypeId()
+		//If you want, store this ID somewhere for later, but you can always get it by doing ExtraVanillaBlocks::TARGET()->getTypeId()
 		$targetTypeId = BlockTypeIds::newId();
 		self::register("target", new Opaque(new BlockIdentifier($targetTypeId), "Target", new BlockTypeInfo(BlockBreakInfo::instant())));
 	}

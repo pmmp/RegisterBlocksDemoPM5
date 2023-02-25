@@ -59,7 +59,7 @@ final class ExtraVanillaItems{
 	}
 
 	protected static function setup() : void{
-		//If you want, store this ID somewhere for later, but you can always get it by doing CustomItems::IRON_HORSE_ARMOR()->getTypeId()
+		//If you want, store this ID somewhere for later, but you can always get it by doing ExtraVanillaItems::IRON_HORSE_ARMOR()->getTypeId()
 		$horseArmorTypeId = ItemTypeIds::newId();
 		self::register("iron_horse_armor", new Item(new ItemIdentifier($horseArmorTypeId), "Iron Horse Armor"));
 	}

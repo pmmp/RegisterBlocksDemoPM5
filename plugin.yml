@@ -1,7 +1,7 @@
 ---
 name: RegisterBlockDemoPM5
 version: 0.0.1
-main: dktapps\RegisterBlockDemoPM5\Main
+main: pmmp\RegisterBlockDemoPM5\Main
 api: 5.0.0
-src-namespace-prefix: dktapps\RegisterBlockDemoPM5
+src-namespace-prefix: pmmp\RegisterBlockDemoPM5
 ...

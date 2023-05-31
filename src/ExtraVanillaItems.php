@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace dktapps\RegisterBlockDemoPM5;
+namespace pmmp\RegisterBlockDemoPM5;
 
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;

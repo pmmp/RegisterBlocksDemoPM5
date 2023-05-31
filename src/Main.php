@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace dktapps\RegisterBlockDemoPM5;
+namespace pmmp\RegisterBlockDemoPM5;
 
 use pocketmine\block\Block;
 use pocketmine\block\RuntimeBlockStateRegistry;

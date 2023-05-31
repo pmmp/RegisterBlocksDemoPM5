@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace dktapps\RegisterBlockDemoPM5;
 
 use pocketmine\block\Block;
-use pocketmine\block\BlockFactory;
+use pocketmine\block\RuntimeBlockStateRegistry;
 use pocketmine\data\bedrock\block\BlockTypeNames;
 use pocketmine\data\bedrock\item\ItemTypeNames;
 use pocketmine\data\bedrock\item\SavedItemData;
@@ -46,7 +46,7 @@ class Main extends PluginBase{
 	 * @param string[] $stringToItemParserNames
 	 */
 	private static function registerSimpleBlock(string $id, Block $block, array $stringToItemParserNames) : void{
-		BlockFactory::getInstance()->register($block);
+		RuntimeBlockStateRegistry::getInstance()->register($block);
 
 		GlobalBlockStateHandlers::getDeserializer()->mapSimple($id, fn() => clone $block);
 		GlobalBlockStateHandlers::getSerializer()->mapSimple($block, $id);

@@ -36,33 +36,21 @@ class Main extends PluginBase{
 
 	public static function registerBlocks() : void{
 		$block = ExtraVanillaBlocks::TARGET();
-		self::registerSimpleBlock(BlockTypeNames::TARGET, $block, ["target"], "all", "none");
+		self::registerSimpleBlock(BlockTypeNames::TARGET, $block, ["target"]);
 	}
 
 	public static function registerItems() : void{
 		$item = ExtraVanillaItems::IRON_HORSE_ARMOR();
-		self::registerSimpleItem(ItemTypeNames::IRON_HORSE_ARMOR, $item, ["iron_horse_armor"], "equipment", "none");
+		self::registerSimpleItem(ItemTypeNames::IRON_HORSE_ARMOR, $item, ["iron_horse_armor"]);
 	}
 
 	/**
 	 * @param string[] $stringToItemParserNames
 	 */
-	private static function registerSimpleBlock(string $id, Block $block, array $stringToItemParserNames, string $category, string $group) : void{
+	private static function registerSimpleBlock(string $id, Block $block, array $stringToItemParserNames) : void{
 		RuntimeBlockStateRegistry::getInstance()->register($block);
 
-        CreativeInventory::getInstance()->add($block->asItem());
-		CompoundTag::create()->setTag("minecraft:creative_category", CompoundTag::create()
-			->setString("category", $category)
-			->setString("group", $group));
-		CompoundTag::create()
-			->setTag("components",
-				CompoundTag::create()->setTag("minecraft:creative_category", CompoundTag::create()
-					->setString("category", $category)
-					->setString("group", $group)))
-			->setTag("menu_category", CompoundTag::create()
-				->setString("category", $category)
-				->setString("group", $group))
-			->setInt("molangVersion", 1);
+        	CreativeInventory::getInstance()->add($block->asItem());
 
 		GlobalBlockStateHandlers::getDeserializer()->mapSimple($id, fn() => clone $block);
 		GlobalBlockStateHandlers::getSerializer()->mapSimple($block, $id);
@@ -75,23 +63,11 @@ class Main extends PluginBase{
 	/**
 	 * @param string[] $stringToItemParserNames
 	 */
-	private static function registerSimpleItem(string $id, Item $item, array $stringToItemParserNames, string $category, string $group) : void{
+	private static function registerSimpleItem(string $id, Item $item, array $stringToItemParserNames) : void{
 		GlobalItemDataHandlers::getDeserializer()->map($id, fn() => clone $item);
 		GlobalItemDataHandlers::getSerializer()->map($item, fn() => new SavedItemData($id));
 
-        CreativeInventory::getInstance()->add($item);
-		CompoundTag::create()->setTag("minecraft:creative_category", CompoundTag::create()
-			->setString("category", $category)
-			->setString("group", $group));
-		CompoundTag::create()
-			->setTag("components",
-				CompoundTag::create()->setTag("minecraft:creative_category", CompoundTag::create()
-					->setString("category", $category)
-					->setString("group", $group)))
-			->setTag("menu_category", CompoundTag::create()
-				->setString("category", $category)
-				->setString("group", $group))
-			->setInt("molangVersion", 1);
+        	CreativeInventory::getInstance()->add($item);
 
 		foreach($stringToItemParserNames as $name){
 			StringToItemParser::getInstance()->register($name, fn() => clone $item);

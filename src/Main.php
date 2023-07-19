@@ -11,6 +11,7 @@ use pocketmine\data\bedrock\item\ItemTypeNames;
 use pocketmine\data\bedrock\item\SavedItemData;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Item;
+use pocketmine\block\BlockTypeIds;
 use pocketmine\item\StringToItemParser;
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\AsyncTask;
@@ -54,7 +55,7 @@ class Main extends PluginBase{
 		GlobalBlockStateHandlers::getDeserializer()->mapSimple($id, fn() => clone $block);
 		GlobalBlockStateHandlers::getSerializer()->mapSimple($block, $id);
 
-		LegacyBlockIdToStringIdMap::getInstance()->add($id, $block->getTypeId());
+		LegacyBlockIdToStringIdMap::getInstance()->add($id, BlockTypeIds::newId());
 
 		foreach($stringToItemParserNames as $name){
 			StringToItemParser::getInstance()->registerBlock($name, fn() => clone $block);

@@ -9,7 +9,9 @@ use pocketmine\block\RuntimeBlockStateRegistry;
 use pocketmine\data\bedrock\block\BlockTypeNames;
 use pocketmine\data\bedrock\item\ItemTypeNames;
 use pocketmine\data\bedrock\item\SavedItemData;
+use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Item;
+use pocketmine\block\BlockTypeIds;
 use pocketmine\item\StringToItemParser;
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\AsyncTask;
@@ -48,6 +50,8 @@ class Main extends PluginBase{
 	private static function registerSimpleBlock(string $id, Block $block, array $stringToItemParserNames) : void{
 		RuntimeBlockStateRegistry::getInstance()->register($block);
 
+        	CreativeInventory::getInstance()->add($block->asItem());
+
 		GlobalBlockStateHandlers::getDeserializer()->mapSimple($id, fn() => clone $block);
 		GlobalBlockStateHandlers::getSerializer()->mapSimple($block, $id);
 
@@ -62,6 +66,8 @@ class Main extends PluginBase{
 	private static function registerSimpleItem(string $id, Item $item, array $stringToItemParserNames) : void{
 		GlobalItemDataHandlers::getDeserializer()->map($id, fn() => clone $item);
 		GlobalItemDataHandlers::getSerializer()->map($item, fn() => new SavedItemData($id));
+
+        	CreativeInventory::getInstance()->add($item);
 
 		foreach($stringToItemParserNames as $name){
 			StringToItemParser::getInstance()->register($name, fn() => clone $item);

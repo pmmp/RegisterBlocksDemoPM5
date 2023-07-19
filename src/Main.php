@@ -55,8 +55,6 @@ class Main extends PluginBase{
 		GlobalBlockStateHandlers::getDeserializer()->mapSimple($id, fn() => clone $block);
 		GlobalBlockStateHandlers::getSerializer()->mapSimple($block, $id);
 
-		LegacyBlockIdToStringIdMap::getInstance()->add($id, BlockTypeIds::newId());
-
 		foreach($stringToItemParserNames as $name){
 			StringToItemParser::getInstance()->registerBlock($name, fn() => clone $block);
 		}

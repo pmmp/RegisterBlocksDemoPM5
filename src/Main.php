@@ -7,7 +7,6 @@ namespace pmmp\RegisterBlockDemoPM5;
 use pocketmine\block\Block;
 use pocketmine\block\RuntimeBlockStateRegistry;
 use pocketmine\data\bedrock\block\BlockTypeNames;
-use pocketmine\data\bedrock\block\upgrade\LegacyBlockIdToStringIdMap;
 use pocketmine\data\bedrock\item\ItemTypeNames;
 use pocketmine\data\bedrock\item\SavedItemData;
 use pocketmine\inventory\CreativeInventory;
@@ -35,8 +34,8 @@ class Main extends PluginBase{
 	}
 
 	public static function registerBlocks() : void{
-		$block = ExtraVanillaBlocks::CRIMSON_NYLIUM();
-		self::registerSimpleBlock(BlockTypeNames::CRIMSON_NYLIUM, $block, ["crimson_nylium"]);
+		$block = ExtraVanillaBlocks::TARGET();
+		self::registerSimpleBlock(BlockTypeNames::TARGET, $block, ["target"]);
 	}
 
 	public static function registerItems() : void{
@@ -55,7 +54,7 @@ class Main extends PluginBase{
 		GlobalBlockStateHandlers::getDeserializer()->mapSimple($id, fn() => clone $block);
 		GlobalBlockStateHandlers::getSerializer()->mapSimple($block, $id);
 
-        	LegacyBlockIdToStringIdMap::getInstance()->add($id, $block->getTypeId());
+		LegacyBlockIdToStringIdMap::getInstance()->add($id, $block->getTypeId());
 
 		foreach($stringToItemParserNames as $name){
 			StringToItemParser::getInstance()->registerBlock($name, fn() => clone $block);
